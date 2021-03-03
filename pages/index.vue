@@ -1,6 +1,6 @@
 <template>
   <div>
-   <button
+    <button
       class="grid-icon"
       v-bind:class="{ active: layout == 'grid' }"
       v-on:click="layout = 'grid'"
@@ -17,19 +17,22 @@
 
     <ul v-if="layout === 'list'" class="list">
       <li v-for="pokemon in pokemons" v-bind:key="pokemon.name">
-        <nuxt-link :to="{name: 'PokemonDetail', params: {pokemon: pokemon.url}}">
-        {{ pokemon.name }}
+        <nuxt-link
+          :to="{ name: 'PokemonDetail', params: { pokemon: pokemon.url } }"
+        >
+          {{ pokemon.name }}
         </nuxt-link>
       </li>
     </ul>
     <div v-if="layout === 'grid'" class="grid-container">
       <div v-for="pokemon in pokemons" v-bind:key="pokemon.name">
-                 <nuxt-link :to="{name: 'PokemonDetail', params: {pokemon: pokemon.url}}">
-        {{ pokemon.name }}
+        <nuxt-link
+          :to="{ name: 'PokemonDetail', params: { pokemon: pokemon.url } }"
+        >
+          {{ pokemon.name }}
         </nuxt-link>
       </div>
     </div>
-  
   </div>
 </template>
 
@@ -37,12 +40,11 @@
 import axios from "axios";
 export default {
   name: "App",
-  components: {
-  },
+  components: {},
   data() {
     return {
       pokemons: [],
-      layout: 'grid',
+      layout: "grid",
     };
   },
   created: async function () {
@@ -56,9 +58,7 @@ export default {
       console.log(error);
     }
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
@@ -67,13 +67,12 @@ export default {
   box-sizing: border-box;
 }
 
-
 /* Grid layout */
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-gap: 10px;
-  background-color: #2196F3;
+  background-color: #2196f3;
   padding: 10px;
 }
 
@@ -104,7 +103,6 @@ export default {
 .list li:hover {
   background-color: #fff;
 }
-
 
 .list li:hover p {
   color: #0096d4;
