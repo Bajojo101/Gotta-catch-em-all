@@ -1,14 +1,14 @@
 <template>
   <div>
     <button
-      class="grid-icon"
+      class="button"
       v-bind:class="{ active: layout == 'grid' }"
       v-on:click="layout = 'grid'"
     >
       Grid View
     </button>
     <button
-      class="list-icon"
+      class="button"
       v-bind:class="{ active: layout == 'list' }"
       v-on:click="layout = 'list'"
     >
@@ -55,7 +55,6 @@ export default {
         "https://pokeapi.co/api/v2/pokemon?limit=151"
       );
       this.pokemons = res.data.results;
-      console.log(res.data.results);
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +68,18 @@ export default {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   
+}
+
+.button {
+  background-color: #2196f3;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 /* Grid layout */

@@ -45,14 +45,13 @@ export default {
       this.$route.params.pokemon
       );
       this.pokemonDetail = res.data;
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
     try {
       var id = this.$route.params.pokemon.split('/');
       this.picture = `https://pokeres.bastionbot.org/images/pokemon/${id[id.length-2]}.png`
-
+      
     } catch (error) {
       console.log(error);
     }
