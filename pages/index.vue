@@ -1,73 +1,64 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        GottaCatchEmAll
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div>
+   <button
+      class="grid-icon"
+      v-bind:class="{ active: layout == 'grid' }"
+      v-on:click="layout = 'grid'"
+    >
+      Grid View
+    </button>
+    <button
+      class="list-icon"
+      v-bind:class="{ active: layout == 'list' }"
+      v-on:click="layout = 'list'"
+    >
+      List View
+    </button>
+
+    <ul v-if="layout === 'list'" class="list">
+      <li v-for="pokemon in pokemons" v-bind:key="pokemon.name">
+        <p>{{ pokemon.name }}</p>
+      </li>
+    </ul>
+
+    <ul v-if="layout === 'grid'" class="grid">
+      <li v-for="pokemon in pokemons" v-bind:key="pokemon.name"></li>
+      <p>Hallo</p>
+    </ul>
   </div>
 </template>
 
 <script>
-export default {}
+import axios from "axios";
+import Grid from "vue-virtual-scroll-grid";
+export default {
+  name: "App",
+  components: {
+    Grid,
+  },
+  data() {
+    return {
+      pokemons: [],
+      layout: "list",
+    };
+  },
+  created: async function () {
+    try {
+      const res = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?limit=151"
+      );
+      this.pokemons = res.data.results;
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  methods: {
+
+  },
+};
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
