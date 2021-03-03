@@ -1,8 +1,29 @@
 <template>
 <div>
-  <img :src="picture" length="100" width="100">
-<h2>{{pokemonDetail.name}}</h2>
-<h2>{{pokemonDetail.id}}</h2>
+ 
+<h2>{{pokemonDetail.id}} {{pokemonDetail.name}}</h2>
+ <img :src="picture" length="100" width="100"><br>
+<table>
+<td>
+  <tr>Abilities:</tr>
+</td>
+<td>
+<tr  v-for="abilities in pokemonDetail.abilities" v-bind:key="abilities.name">
+  {{abilities.ability.name}} 
+</tr>
+</td>
+</table>
+
+<table>
+<td>
+  <tr>Type:</tr>
+</td>
+<td>
+<tr  v-for="types in pokemonDetail.types" v-bind:key="types.name">
+  {{types.type.name}} 
+</tr>
+</td>
+</table>
 </div>
 
 </template>

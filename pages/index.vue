@@ -16,19 +16,21 @@
     </button>
 
     <ul v-if="layout === 'list'" class="list">
-      <li v-for="pokemon in pokemons" v-bind:key="pokemon.name">
+      <li v-for="(pokemon, index) in pokemons" v-bind:key="pokemon.name">
         <nuxt-link
           :to="{ name: 'PokemonDetail', params: { pokemon: pokemon.url } }"
         >
-          {{ pokemon.name }}
+        {{index+1}}
+        {{ pokemon.name }}
         </nuxt-link>
       </li>
     </ul>
     <div v-if="layout === 'grid'" class="grid-container">
-      <div v-for="pokemon in pokemons" v-bind:key="pokemon.name">
+      <div v-for="(pokemon, index) in pokemons" v-bind:key="pokemon.name">
         <nuxt-link
           :to="{ name: 'PokemonDetail', params: { pokemon: pokemon.url } }"
         >
+          {{index +1}}
           {{ pokemon.name }}
         </nuxt-link>
       </div>
@@ -65,12 +67,14 @@ export default {
 <style>
 * {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 /* Grid layout */
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto;
   grid-gap: 10px;
   background-color: #2196f3;
   padding: 10px;
@@ -80,13 +84,29 @@ export default {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 20px 0;
-  font-size: 30px;
+  font-size: 20px;
+}
+.grid-container div:hover {
+  background-color: #fff;
+}
+.grid-container div:hover a {
+  color: #0096d4;
+}
+
+.grid-container div a {
+  color: #000;
+  display: table-cell;
+  font-weight: 700;
+  padding: 0 0 0 15px;
+  vertical-align: middle;
+  width: 100%;
+  text-decoration: none;
 }
 
 /* List layout */
 .list {
   background-color: #ddedfb;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
   list-style: none;
   margin: 0 auto;
   padding: 0;
@@ -104,16 +124,17 @@ export default {
   background-color: #fff;
 }
 
-.list li:hover p {
+.list li:hover a {
   color: #0096d4;
 }
 
-.list li p {
+.list li a {
   color: #000;
   display: table-cell;
   font-weight: 700;
   padding: 0 0 0 15px;
   vertical-align: middle;
   width: 100%;
+  text-decoration: none;
 }
 </style>
